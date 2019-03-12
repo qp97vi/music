@@ -55,7 +55,7 @@ export default {
         let localDate=window.localStorage.getItem('uId')
         // this.id=localDate
         var _this=this
-        this.axios.get(`http://192.168.1.28:3000/user/playlist?uid=${localDate}`).then(function(response){
+        this.axios.get(`user/playlist?uid=${localDate}`).then(function(response){
             console.log(response);
             _this.playlist=response.data.playlist;
             _this.playlist.forEach(element => {

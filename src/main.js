@@ -26,6 +26,7 @@ Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 
 import 'mint-ui/lib/style.css'
+axios.defaults.baseURL='http://192.168.1.28:3000/'
 Vue.prototype.axios = axios;
 /* eslint-disable no-new */
 new Vue({

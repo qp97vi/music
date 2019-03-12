@@ -19,7 +19,7 @@ export default {
     },
     created() {
         var _this=this;
-        this.axios.get('http://192.168.1.28:3000/banner').then(function(response){
+        this.axios.get('banner').then(function(response){
             console.log(response);
             _this.banner=response.data.banners
             // console.log(response.data.banners.imageUrl);

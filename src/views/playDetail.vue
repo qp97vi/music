@@ -26,7 +26,7 @@ export default {
     methods: {
         getId(){
              var _this=this;
-        this.axios.get(`http://192.168.1.28:3000/song/url?id=${this.id}`).then(function(response){
+        this.axios.get(`song/url?id=${this.id}`).then(function(response){
             console.log(response)
             _this.url=response.data.data
             console.log(_this.url);

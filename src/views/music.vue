@@ -10,7 +10,6 @@
                    <li v-for="(item,index) in songlist" v-if="index<12" @click="open(item.id)">
                        <div class="imgBox">
                             <img v-lazy="item.picUrl" alt="">
-                            <!-- <img v-lazy="" alt="">  -->
                             <em>{{Math.round((item.playCount/10000)*100/100)}}万</em>
                        </div>
                         <span>{{item.name}}</span>  
@@ -45,7 +44,6 @@
 import vfooter from "@/components/common/footer/footer";
 import banner from "@/components/common/banner/banner";
 // import * as types from "../store/types";
-
 export default {
     name:'music',
     data() {
@@ -66,7 +64,7 @@ export default {
     methods: {
         getSongList(){
             var _this=this;
-           this.axios.get('http://192.168.1.28:3000/personalized').then(function(response){
+           this.axios.get('personalized').then(function(response){
                console.log(response);
                _this.songlist=response.data.result;
              

@@ -84,7 +84,7 @@ export default {
         this.id=this.$route.params.id
         
         var _this=this;
-        this.axios.get(`http://192.168.1.28:3000/playlist/detail?id=${this.id}`).then(function(response){
+        this.axios.get(`playlist/detail?id=${this.id}`).then(function(response){
             console.log(response);
             _this.SongList=response.data.playlist;
             _this.creator=response.data.playlist.creator;

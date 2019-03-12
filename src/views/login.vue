@@ -45,7 +45,7 @@ export default {
       var _this = this;
       this.axios
         .get(
-          `http://192.168.1.28:3000/login/cellphone?phone=${
+          `login/cellphone?phone=${
             this.tel
           }&password=${this.psd}`
         )
