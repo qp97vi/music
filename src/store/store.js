@@ -11,6 +11,7 @@ export default new Vuex.Store({
         title: '',
         uId:'',//用户id
         // songtips:''//歌单编辑提示
+        
     },
     mutations: {
         [types.LOGIN]: (state, data) => {

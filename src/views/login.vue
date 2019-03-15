@@ -3,19 +3,19 @@
     <div>
       <label for="">手机号:</label>
       <input
-      type="text"
-      v-model="tel"
-      placeholder="请输入您的电话"
-    ></div>
+        type="text"
+        v-model="tel"
+        placeholder="请输入您的电话"
+      ></div>
     <div>
       <label for=""> 密码:</label>
-     <input
-      type="password"
-      v-model="psd"
-      name=""
-      id=""
-      placeholder="请输入您的密码"
-    >
+      <input
+        type="password"
+        v-model="psd"
+        name=""
+        id=""
+        placeholder="请输入您的密码"
+      >
     </div>
     <div
       class="submit"
@@ -32,23 +32,18 @@ export default {
       tel: "",
       psd: "",
       xsrfCookieName: "",
-      uID:'',
+      uID: ""
     };
   },
- 
+
   mounted() {
     this.$store.commit(types.TITLE, "Login");
   },
   methods: {
-    
     login() {
       var _this = this;
       this.axios
-        .get(
-          `login/cellphone?phone=${
-            this.tel
-          }&password=${this.psd}`
-        )
+        .get(`login/cellphone?phone=${this.tel}&password=${this.psd}`)
         .then(function(response) {
           // handle success
           console.log(response.data.account.id);
@@ -62,9 +57,9 @@ export default {
             _this.$router.push({
               path: redirect
             });
-              _this.$store.commit(types.UID,response.data.account.id)
+            _this.$store.commit(types.UID, response.data.account.id);
           }
-        
+
           // console.log( _this.musicList);
         })
         .catch(function(error) {
@@ -91,7 +86,7 @@ export default {
   bottom: 0;
   margin: auto;
 }
-label{
+label {
   display: inline-block;
   width: 120px;
   text-align: right;
@@ -99,7 +94,7 @@ label{
 
 .submit {
   height: 80px;
-  line-height:80px;
+  line-height: 80px;
   padding: 0 40px;
   text-align: center;
   background: red;
@@ -108,7 +103,7 @@ label{
   margin: 0 auto;
   border-radius: 40px;
 }
-input{
+input {
   height: 60px;
   margin-bottom: 20px;
   padding-left: 10px;
