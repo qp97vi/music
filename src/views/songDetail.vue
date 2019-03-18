@@ -87,7 +87,7 @@ export default {
     },
     play(id) {
       //播放
-      console.log(id);
+      // console.log(id);
       this.$router.push({ path: `/play/${id}` });
     }
   },
@@ -101,7 +101,7 @@ export default {
 
     var _this = this;
     this.axios.get(`playlist/detail?id=${this.id}`).then(function(response) {
-      console.log(response);
+      // console.log(response);
       _this.SongList = response.data.playlist;
       _this.creator = response.data.playlist.creator;
       _this.playCount = Math.round(

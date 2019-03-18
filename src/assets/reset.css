@@ -17,3 +17,8 @@ html,body,.home,#app{
 em,i{
     font-style: normal;
 }
+image[lazy=loading] {
+    height: 100px;
+    margin: auto;
+  background: url("../assets/logo.png") no-repeat fixed center;
+}

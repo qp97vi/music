@@ -46,7 +46,7 @@ export default {
         .get(`login/cellphone?phone=${this.tel}&password=${this.psd}`)
         .then(function(response) {
           // handle success
-          console.log(response.data.account.id);
+          // console.log(response.data.account.id);
 
           _this.xsrfCookieName = response.config.xsrfCookieName;
           if (_this.xsrfCookieName) {
@@ -64,6 +64,7 @@ export default {
         })
         .catch(function(error) {
           // handle error
+          confirm('账号或密码错误')
         })
         .then(function() {
           // always executed

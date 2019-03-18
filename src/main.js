@@ -6,7 +6,7 @@ import router from './router'
 import './assets/font/iconfont.css'
 
 
-Vue.config.productionTip = false
+
 import axios from 'axios'
 import 'mint-ui/lib/style.css'
 
@@ -26,8 +26,11 @@ Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 
 import 'mint-ui/lib/style.css'
-axios.defaults.baseURL='http://192.168.1.28:3000/'
+axios.defaults.baseURL='http://192.168.1.129:3000/'
 Vue.prototype.axios = axios;
+
+Vue.config.productionTip = false
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

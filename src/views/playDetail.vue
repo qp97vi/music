@@ -27,7 +27,7 @@ export default {
   },
   created() {
     this.id = this.$route.params.id;
-    console.log(this.id);
+    // console.log(this.id);
     //    this.getId();
   },
   methods: {

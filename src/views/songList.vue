@@ -56,18 +56,18 @@ export default {
   },
   methods: {
     open(id) {
-      console.log(id);
+      // console.log(id);
       this.$router.push({ path: `/songDetail/${id}` });
     }
   },
   created() {
     let localDate = window.localStorage.getItem("uId");
-    console.log(localDate);
+    // console.log(localDate);
     
     // this.id=localDate
     var _this = this;
     this.axios.get(`user/playlist?uid=${localDate}`).then(function(response) {
-      console.log(response);
+      // console.log(response);
       _this.playlist = response.data.playlist;
       _this.playlist.forEach(element => {
         if (element.ordered == false) {

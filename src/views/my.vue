@@ -46,7 +46,7 @@ export default {
     let localDate = window.localStorage.getItem("uId");
      var _this = this;
     this.axios.get(`/user/detail?uid=${localDate}`).then(function(response) {
-      console.log(response);
+      // console.log(response);
       // _this.playlist = response.data.playlist;
       // _this.playlist.forEach(element => {
       //   if (element.ordered == false) {
@@ -61,6 +61,7 @@ export default {
 };
 </script>
 <style scoped>
+
 .header{
   height: 120px;
   display: flex;
@@ -77,18 +78,45 @@ export default {
 ul{
   display: flex;
   align-items: center;
+  
 }
 li{
   width: 25%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 86px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 60px;
+  position: relative;
+}
+li::before{
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  border-right: 1px solid #ddd;
+}
+li:last-child::before{
+  height: 0;
 }
 img{
   border-radius: 50%;
   width: 100px;
   height: 100px;
   float: left;
+  padding-left: 44px;
+  margin-left: 20px;
+}
+i{
+  color: #cccccc;
+  font-size: 28px;
+}
+li em{
+  font-size: 30px;
+
 }
 .logout {
   display: block;
@@ -98,5 +126,7 @@ img{
 
   background: red;
   color: #fff;
+  margin:0 60px;
+  border-radius: 48px;
 }
 </style>

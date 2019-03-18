@@ -65,7 +65,7 @@ export default {
         getSongList(){
             var _this=this;
            this.axios.get('personalized').then(function(response){
-               console.log(response);
+            //    console.log(response);
                _this.songlist=response.data.result;
              
            })
