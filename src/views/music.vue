@@ -43,7 +43,7 @@
 <script>
 import vfooter from "@/components/common/footer/footer";
 import banner from "@/components/common/banner/banner";
-// import * as types from "../store/types";
+import * as types from "../store/types";
 export default {
     name:'music',
     data() {
@@ -92,12 +92,17 @@ export default {
     },
     created() {
         this.getSongList()
-        // this.getMusicList()
-       
+        // this.getMusicList()  
+    },
+    mounted() {
+        this.$store.commit(types.SONGTITLE,"首页")
     },
 }
 </script>
 <style scoped>
+#page{
+  margin-top: 0px;
+}
 image[lazy=loading] {
    width: 40px;
   height: 300px;

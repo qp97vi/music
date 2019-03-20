@@ -1,16 +1,6 @@
 <template>
   <div class="songDetail">
-    <div class="songTop">
-      <span
-        class="iconfont icon-fanhui"
-        @click="backing"
-      ></span>
-      <div class="tilte">
-        <em>歌单</em>
-
-      </div>
-      <!-- <img :src="" alt=""> -->
-    </div>
+    
     <div
       class="bgFilter"
       :style="{backgroundImage: `url(${SongList ? SongList.coverImgUrl: ''})`}"
@@ -67,7 +57,7 @@
 </template>
 <script>
 // import store from '../store/store'
-// import * as types from '../store/types'
+import * as types from '../store/types'
 // import { mapMutations } from 'vuex'
 export default {
   name: "songDetail",
@@ -81,6 +71,7 @@ export default {
       alia: ""
     };
   },
+  
   methods: {
     backing() {
       this.$router.go(-1);
@@ -96,7 +87,11 @@ export default {
   // 			return this.$store.state.songtips
   // 		}
   // 	},
+  mounted(){
+    		 this.$store.commit(types.SONGTITLE,'歌单')
+    	},
   created() {
+   
     this.id = this.$route.params.id;
 
     var _this = this;
@@ -244,4 +239,5 @@ li {
   padding: 0 20px;
   text-align: center;
 }
+
 </style>

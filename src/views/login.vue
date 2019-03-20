@@ -77,8 +77,10 @@ export default {
 .login {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 0 20px;
-  height: 236px;
+  height: 100%;
   position: absolute;
   width: calc(100% - 40px);
   top: 0;
@@ -86,13 +88,20 @@ export default {
   right: 0;
   bottom: 0;
   margin: auto;
+  background: #e6e6e6;
+}
+.login>div{
+  width: 70%;
+  margin: 0 auto;
 }
 label {
   display: inline-block;
-  width: 120px;
+  width: 104px;
   text-align: right;
 }
-
+.login>.submit{
+  width: 20%;
+}
 .submit {
   height: 80px;
   line-height: 80px;
@@ -108,6 +117,8 @@ input {
   height: 60px;
   margin-bottom: 20px;
   padding-left: 10px;
-  width: 70%;
+  width: 73%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 </style>

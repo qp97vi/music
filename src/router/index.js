@@ -41,20 +41,20 @@ const  routes=[
         })
       }
     },
-    {
-      path:'/friend',
-      name:'friend',
-       meta:{
-        requireAuth:true,
-      },
-      component:resolve=>{
-        Indicator.open('加载中...');
-        require.ensure(['@/views/friend'], () => {
-          resolve(require('@/views/friend'))
-          Indicator.close()
-        })
-      }
-    },
+    // {
+    //   path:'/friend',
+    //   name:'friend',
+    //    meta:{
+    //     requireAuth:true,
+    //   },
+    //   component:resolve=>{
+    //     Indicator.open('加载中...');
+    //     require.ensure(['@/views/friend'], () => {
+    //       resolve(require('@/views/friend'))
+    //       Indicator.close()
+    //     })
+    //   }
+    // },
     {
       path:'/my',
       name:'my',

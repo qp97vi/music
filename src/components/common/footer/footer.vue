@@ -9,10 +9,10 @@
             <span class="iconfont icon-yinyue"></span>
             我的音乐
         </router-link>
-        <router-link to="/friend" tag="li" active-class="as">
+        <!-- <router-link to="/friend" tag="li" active-class="as">
             <span class="iconfont icon-pengyou"></span>
             朋友
-        </router-link>
+        </router-link> -->
         <router-link to="/my" tag="li" active-class="as">
             <span class="iconfont icon-zhanghao"></span>
             账号
@@ -36,6 +36,7 @@ export default ({
 .footer{
     display: flex;
     align-items: center;
+    justify-content: space-around;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -53,7 +54,7 @@ span{
 }
 
 .footer li{
-    width: 25%;
+    min-width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,34 +1,49 @@
 <template>
   <div class="play play-box">
-    播放
+    
+    <!-- 播放 -->
     <div
-      v-for="(item,index) in url"
+      v-for="(item,index) in a"
       class=""
     >
       <audio
         :src="item.url"
-        autoplay
-        preload="auto"
-        loop
-        controls
-      ></audio><!-- 移动端audio,video不能自动播放 支持后台播放可以设置隐藏-->
+        controls autoplay loop preload="auto"
+       
+      ></audio>
     </div>
-
+<!-- 移动端audio,video不能自动播放 支持后台播放可以设置隐藏-->
+    <!-- <audio controls autoplay loop preload="auto" ></audio> -->
+   <!-- {{a}} -->
   </div>
 </template>
 <script>
+import * as types from "../store/types";
+import store from '../store/store'
+ import { mapState, mapMutations } from 'vuex';
 export default {
   name: "play",
   data() {
     return {
       id: "", //歌曲id
-      url: ""
+      url: "",
     };
   },
+  computed: {
+    a(){
+
+    return this.$store.state.songUrl;
+    
+    },
+    
+  },
+  mounted(){
+    		 this.$store.commit(types.SONGTITLE,'歌曲详情')
+    	},
   created() {
     this.id = this.$route.params.id;
     // console.log(this.id);
-    //    this.getId();
+       this.getId();
   },
   methods: {
     getId() {
@@ -37,16 +52,27 @@ export default {
         console.log(response);
         _this.url = response.data.data;
         console.log(_this.url);
-
+        _this.$store.commit(types.SONGURL, _this.url)
         //    console.log(_this.url.data.url);
-        //    _this.$refs.audio.src=JSON.stringify(_this.url)
+          //  _this.$refs.audio.src=JSON.stringify(_this.url)
       });
-    }
+    },
+    
   }
 };
 </script>
 <style scoped>
-.play-box {
-  display: none;
+
+.play div{
+  height: 108px;
+  position: fixed;
+  bottom: 0;
+  z-index: 1111;
+  left: 50%;
+  margin-left:-300px;
 }
+/* audio{
+
+} */
+
 </style>

@@ -77,8 +77,7 @@ export default {
 }
 ul{
   display: flex;
-  align-items: center;
-  
+  align-items: center;  
 }
 li{
   width: 25%;
@@ -120,13 +119,13 @@ li em{
 }
 .logout {
   display: block;
-  height: 90px;
+  height: 60px;
   text-align: center;
-  line-height: 90px;
-
+  line-height: 60px;
+  font-size: 26px;
   background: red;
   color: #fff;
-  margin:0 60px;
+  margin:0 260px;
   border-radius: 48px;
 }
 </style>
