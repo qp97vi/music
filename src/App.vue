@@ -3,10 +3,9 @@
     <sidetop></sidetop>
     <play v-if="a"></play>
     <router-view></router-view>
-  
   </div>
 </template>
-
+ 
 <script>
 import play from '@/views/playDetail.vue'
 import sidetop from "@/components/common/sideTop";
@@ -15,7 +14,6 @@ export default {
   name: 'App',
   data() {
     return {
-     
     }
   },
   components:{
