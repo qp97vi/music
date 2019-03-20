@@ -89,6 +89,7 @@ export default {
   bottom: 0;
   margin: auto;
   background: #e6e6e6;
+  z-index: 11;
 }
 .login>div{
   width: 70%;
