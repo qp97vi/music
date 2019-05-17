@@ -2,7 +2,10 @@
   <div id="page">
     <div class="my">
       <div class="header">
-        <img :src="users.avatarUrl" alt="">
+        <img
+          :src="users.avatarUrl"
+          alt=""
+        >
         <div class="name">
           <span>{{users.nickname}}</span>
           <em>{{users.signature}}</em>
@@ -29,7 +32,7 @@ export default {
   name: "my",
   data() {
     return {
-      users:''
+      users: ''
     };
   },
   components: {
@@ -44,8 +47,8 @@ export default {
   },
   created() {
     let localDate = window.localStorage.getItem("uId");
-     var _this = this;
-    this.axios.get(`/user/detail?uid=${localDate}`).then(function(response) {
+    var _this = this;
+    this.axios.get(`/user/detail?uid=${localDate}`).then(function (response) {
       // console.log(response);
       // _this.playlist = response.data.playlist;
       // _this.playlist.forEach(element => {
@@ -55,31 +58,30 @@ export default {
       //     _this.newImported.push(element);
       //   }
       // });
-      _this.users=response.data.profile;
+      _this.users = response.data.profile;
     });
   }
 };
 </script>
 <style scoped>
-
-.header{
+.header {
   height: 120px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid #dddddd;
 }
-.name{
+.name {
   display: flex;
   flex-direction: column;
 }
-.name em{
+.name em {
   font-size: 20px;
 }
-ul{
+ul {
   display: flex;
-  align-items: center;  
+  align-items: center;
 }
-li{
+li {
   width: 25%;
   display: flex;
   flex-direction: column;
@@ -90,7 +92,7 @@ li{
   margin-bottom: 60px;
   position: relative;
 }
-li::before{
+li::before {
   content: "";
   position: absolute;
   right: 0;
@@ -98,10 +100,10 @@ li::before{
   height: 100%;
   border-right: 1px solid #ddd;
 }
-li:last-child::before{
+li:last-child::before {
   height: 0;
 }
-img{
+img {
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -109,13 +111,12 @@ img{
   padding-left: 44px;
   margin-left: 20px;
 }
-i{
+i {
   color: #cccccc;
   font-size: 28px;
 }
-li em{
+li em {
   font-size: 30px;
-
 }
 .logout {
   display: block;
@@ -125,7 +126,7 @@ li em{
   font-size: 26px;
   background: red;
   color: #fff;
-  margin:0 260px;
+  margin: 0 260px;
   border-radius: 48px;
 }
 </style>

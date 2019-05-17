@@ -14,7 +14,7 @@ module.exports = {
       // 代理所有的以 /api 开头的请求到 https://xxxx.com
       '/': {  //使用"/api"来代替"http://f.apiplus.c" 
           //target: 'http://192.168.0.102:8080', //源地址 
-          target: 'http://192.168.1.28:3000', //源地址 
+          target: 'http://localhost:3000', //源地址 
           changeOrigin: true, //改变源 
           pathRewrite: { 
             // '^/api': '' //路径重写 
@@ -23,7 +23,7 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host: '192.168.1.28', // can be overwritten by process.env.HOST
+    host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

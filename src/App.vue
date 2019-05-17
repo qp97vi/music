@@ -1,43 +1,39 @@
 <template>
   <div id="app">
-    <sidetop></sidetop>
-    <play v-if="a"></play>
+    <player v-show="songlists"></player>
     <router-view></router-view>
   </div>
 </template>
- 
+
 <script>
-import play from '@/views/playDetail.vue'
-import sidetop from "@/components/common/sideTop";
-import * as types from '@/store/types' 
+import play from '@/views/playDetail.vue';
+import * as types from '@/store/types';
+import player from "@/components/common/player/player";
 export default {
   name: 'App',
   data() {
     return {
+
     }
   },
-  components:{
-    'play':play,
-    'sidetop':sidetop
+  components: {
+    'play': play,
+    player
   },
   computed: {
-    a(){
-       return this.$store.state.songUrl;
+    songlists() {
+      return this.$store.state.songUrl;
     }
   },
- 
 }
 
 </script>
 
 <style>
-@import './assets/reset.css';
-#page{
-  margin-top: 90px;
-}
+@import "./assets/reset.css";
 </style>
 <style scoped>
-.songTop{
+.songTop {
   display: none;
 }
 </style>

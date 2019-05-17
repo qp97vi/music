@@ -44,7 +44,7 @@ export default {
       var _this = this;
       this.axios
         .get(`login/cellphone?phone=${this.tel}&password=${this.psd}`)
-        .then(function(response) {
+        .then(function (response) {
           // handle success
           // console.log(response.data.account.id);
 
@@ -62,11 +62,11 @@ export default {
 
           // console.log( _this.musicList);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           // handle error
           confirm('账号或密码错误')
         })
-        .then(function() {
+        .then(function () {
           // always executed
         });
     }
@@ -91,7 +91,7 @@ export default {
   background: #e6e6e6;
   z-index: 11;
 }
-.login>div{
+.login > div {
   width: 70%;
   margin: 0 auto;
 }
@@ -100,7 +100,7 @@ label {
   width: 104px;
   text-align: right;
 }
-.login>.submit{
+.login > .submit {
   width: 20%;
 }
 .submit {

@@ -63,10 +63,10 @@ export default {
   created() {
     let localDate = window.localStorage.getItem("uId");
     // console.log(localDate);
-    
+
     // this.id=localDate
     var _this = this;
-    this.axios.get(`user/playlist?uid=${localDate}`).then(function(response) {
+    this.axios.get(`user/playlist?uid=${localDate}`).then(function (response) {
       // console.log(response);
       _this.playlist = response.data.playlist;
       _this.playlist.forEach(element => {
@@ -81,7 +81,6 @@ export default {
 };
 </script>
 <style scoped>
-
 img {
   width: 80px;
   height: 80px;

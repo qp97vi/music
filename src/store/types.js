@@ -9,3 +9,7 @@ export const UID = 'uId'
 export const SONGURL = 'songUrl'
 
 export const SONGTITLE = 'songTitle'
+
+export const SONGID = 'songid'
+
+export const PLAYID = 'playid'

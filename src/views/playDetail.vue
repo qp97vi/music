@@ -1,26 +1,16 @@
 <template>
-  <div class="play play-box">
-    
-    <!-- 播放 -->
-    <div
-      v-for="(item,index) in a"
-      class=""
-    >
-      <audio
-        :src="item.url"
-        controls autoplay loop preload="auto"
-       
-      ></audio>
-    </div>
-<!-- 移动端audio,video不能自动播放 支持后台播放可以设置隐藏-->
-    <!-- <audio controls autoplay loop preload="auto" ></audio> -->
-   <!-- {{a}} -->
+  <div>
+    <sidetop></sidetop>
+    {{playid}}
+    <div v-if="!songlists">会员专享无法播放</div>
   </div>
 </template>
 <script>
 import * as types from "../store/types";
-import store from '../store/store'
- import { mapState, mapMutations } from 'vuex';
+// import {request} from '../api';
+import store from '../store/store';
+import sidetop from "@/components/common/sideTop";
+import { mapState, mapMutations } from 'vuex';
 export default {
   name: "play",
   data() {
@@ -30,49 +20,57 @@ export default {
     };
   },
   computed: {
-    a(){
-
-    return this.$store.state.songUrl;
-    
+    playid() {
+      return this.$store.state.playid;
     },
-    
+    songlists() {
+      return this.$store.state.songUrl;
+    }
   },
-  mounted(){
-    		 this.$store.commit(types.SONGTITLE,'歌曲详情')
-    	},
   created() {
-    this.id = this.$route.params.id;
-    // console.log(this.id);
-       this.getId();
+    // console.log()
+    this.getId();
+    this.getlyric()
   },
   methods: {
     getId() {
+      let id = this.$route.params.id;
+
       var _this = this;
-      this.axios.get(`song/url?id=${this.id}`).then(function(response) {
-        console.log(response);
-        _this.url = response.data.data;
-        console.log(_this.url);
+      this.$store.commit(types.PLAYID, id)
+      this.axios.get(`song/url?id=${id}`).then(function (response) {
+        // console.log(response);
+        _this.url = response.data.data[0].url;
+        // console.log(_this.url);
         _this.$store.commit(types.SONGURL, _this.url)
-        //    console.log(_this.url.data.url);
-          //  _this.$refs.audio.src=JSON.stringify(_this.url)
+        // console.log(_this.url);
+        //  _this.$refs.audio.src=JSON.stringify(_this.url)
       });
+
     },
-    
+    getlyric() {
+
+      this.axios.get(`/lyric?id=${this.$store.state.playid}`).then(function (response) {
+        // console.log(response);
+
+      });
+      // /lyric?id=33894312
+    }
+
+  },
+  mounted() {
+
+    this.$store.commit(types.SONGTITLE, '歌曲详情')
+    // this.id = this.$route.params.id;
+    // console.log(this.id)
+  },
+  components: {
+    sidetop,
   }
 };
 </script>
 <style scoped>
-
-.play div{
-  height: 108px;
-  position: fixed;
-  bottom: 0;
-  z-index: 1111;
-  left: 50%;
-  margin-left:-300px;
-}
 /* audio{
 
 } */
-
 </style>

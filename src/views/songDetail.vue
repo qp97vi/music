@@ -1,6 +1,6 @@
 <template>
   <div class="songDetail">
-    
+    <sidetop></sidetop>
     <div
       class="bgFilter"
       :style="{backgroundImage: `url(${SongList ? SongList.coverImgUrl: ''})`}"
@@ -39,7 +39,7 @@
       </div>
       <li
         v-for="(item,index) in song"
-        @click="play(item.id)"
+        @click="play(item.id,index)"
       >
         <div class="songLeft">
           {{index+1}}
@@ -58,6 +58,8 @@
 <script>
 // import store from '../store/store'
 import * as types from '../store/types'
+import sidetop from "@/components/common/sideTop";
+import player from "@/components/common/player/player";
 // import { mapMutations } from 'vuex'
 export default {
   name: "songDetail",
@@ -68,18 +70,39 @@ export default {
       creator: "",
       playCount: "",
       song: "",
-      alia: ""
+      alia: "",
+      songid: [],//歌曲列表
+      playlist: {
+        tracks: [],
+        creator: {},
+      },
     };
   },
-  
+  computed: {
+    songlists() {
+      return this.$store.state.songUrl
+    },
+    playid() {
+      return this.$store.state.playid;
+    },
+  },
   methods: {
     backing() {
       this.$router.go(-1);
     },
-    play(id) {
+    play(id, index) {
       //播放
-      // console.log(id);
-      this.$router.push({ path: `/play/${id}` });
+      // this.$router.push({ path: `/play/${id}` });
+      var _this = this
+      this.$store.commit(types.PLAYID, id)
+      this.axios.get(`song/url?id=${id}`).then(function (response) {
+        // console.log(response);
+        _this.url = response.data.data[0].url;
+        // console.log(_this.url);
+        _this.$store.commit(types.SONGURL, _this.url)
+        // console.log(_this.url);
+        //  _this.$refs.audio.src=JSON.stringify(_this.url)
+      });
     }
   },
   // computed:{
@@ -87,17 +110,19 @@ export default {
   // 			return this.$store.state.songtips
   // 		}
   // 	},
-  mounted(){
-    		 this.$store.commit(types.SONGTITLE,'歌单')
-    	},
+  mounted() {
+    this.$store.commit(types.SONGTITLE, '歌单')
+
+  },
   created() {
-   
+
     this.id = this.$route.params.id;
 
     var _this = this;
-    this.axios.get(`playlist/detail?id=${this.id}`).then(function(response) {
+    this.axios.get(`playlist/detail?id=${this.id}`).then(function (response) {
       // console.log(response);
       _this.SongList = response.data.playlist;
+      _this.playlist = response.data.playlist;
       _this.creator = response.data.playlist.creator;
       _this.playCount = Math.round(
         ((response.data.playlist.playCount / 10000) * 100) / 100
@@ -105,7 +130,16 @@ export default {
       // console.log(_this.playCount);
       _this.song = response.data.playlist.tracks;
       _this.alia = response.data.playlist.tracks.alia;
+
+      _this.songid = response.data.playlist.trackIds;
+      // console.log(_this.songid)
+      _this.$store.commit(types.SONGID, _this.songid);
     });
+
+  },
+  components: {
+    sidetop,
+    player
   }
 };
 </script>
@@ -239,5 +273,4 @@ li {
   padding: 0 20px;
   text-align: center;
 }
-
 </style>

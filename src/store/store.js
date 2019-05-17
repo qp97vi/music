@@ -13,6 +13,8 @@ export default new Vuex.Store({
         // songtips:''//歌单编辑提示
         songUrl:'',//歌曲url
         songTitle:'首页',
+        songid:[],
+        playid: ""
     },
     mutations: {
         [types.LOGIN]: (state, data) => {
@@ -36,6 +38,12 @@ export default new Vuex.Store({
         },
         [types.SONGTITLE]: (state,data) => {
             state.songTitle=data;
-        }
+        },
+        [types.SONGID]:(state,data)=>{
+            state.songid=data;
+        },
+        [types.PLAYID]:(state, data) =>{
+            state.playid =data
+        },
     }
 })

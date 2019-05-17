@@ -1,6 +1,7 @@
 <template>
 
   <div class="songTop">
+
     <span
       class="iconfont icon-fanhui"
       @click="backing"
@@ -18,7 +19,9 @@ import * as types from "@/store/types";
 export default {
   name: "sidetop",
   data() {
-    return {};
+    return {
+
+    };
   },
   computed: {
     title() {
@@ -29,7 +32,7 @@ export default {
     backing() {
       this.$router.go(-1);
     }
-  }
+  },
 };
 </script>
 <style scoped>

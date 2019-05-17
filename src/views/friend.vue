@@ -1,5 +1,5 @@
 <template>
-   <div id="page">
+  <div id="page">
     <div class="friend">
       朋友
     </div>
@@ -17,10 +17,10 @@ export default {
     "v-footer": vfooter
   },
   created() {
-      this.axios.get(`http://192.168.1.109:3000/event`).then(function(response){
-          console.log(response);
+    this.axios.get(`http://192.168.1.109:3000/event`).then(function (response) {
+      console.log(response);
 
-      })
+    })
   },
 };
 </script>
