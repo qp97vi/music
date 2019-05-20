@@ -14,7 +14,9 @@ export default new Vuex.Store({
         songUrl:'',//歌曲url
         songTitle:'首页',
         songid:[],
-        playid: ""
+        playid: "",
+        songs:"",
+        fullScreen: true,
     },
     mutations: {
         [types.LOGIN]: (state, data) => {
@@ -45,5 +47,12 @@ export default new Vuex.Store({
         [types.PLAYID]:(state, data) =>{
             state.playid =data
         },
+        [types.SONGPIC]:(state, data) =>{
+            state.songs =data
+        },
+        [types.SONGNAME]:(state,data)=>{
+            state.songnames=data;
+        },
+        
     }
 })

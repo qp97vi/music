@@ -81,6 +81,9 @@ export default {
 };
 </script>
 <style scoped>
+#page{
+  background:white;
+}
 img {
   width: 80px;
   height: 80px;

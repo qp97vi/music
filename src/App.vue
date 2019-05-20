@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <player v-show="songlists"></player>
+    <player v-if="songlists"></player>
     <router-view></router-view>
   </div>
 </template>
@@ -33,6 +33,7 @@ export default {
 @import "./assets/reset.css";
 </style>
 <style scoped>
+
 .songTop {
   display: none;
 }

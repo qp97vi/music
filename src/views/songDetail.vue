@@ -75,6 +75,7 @@ export default {
       playlist: {
         tracks: [],
         creator: {},
+       
       },
     };
   },
@@ -96,14 +97,43 @@ export default {
       var _this = this
       this.$store.commit(types.PLAYID, id)
       this.axios.get(`song/url?id=${id}`).then(function (response) {
-        // console.log(response);
+        console.log(response);
         _this.url = response.data.data[0].url;
         // console.log(_this.url);
         _this.$store.commit(types.SONGURL, _this.url)
+      
+        
+       
+           
+      
         // console.log(_this.url);
         //  _this.$refs.audio.src=JSON.stringify(_this.url)
       });
-    }
+      this.$store.state.fullScreen=true
+      this.getsongPic(id)
+    
+     
+      // if(!this.songlists){
+      //   console.log(1)
+      //   this.playBackground=true
+      //    this.$store.commit(types.CHANGER, this.playBackground)
+      //    console.log(this.playBackground)
+      // }
+       
+    },
+     /*获取歌曲图片*/
+    getsongPic(id){
+     
+      var _this=this;
+      this.axios.get(`/song/detail?ids=${id}`).then(function(res){
+        console.log(res.data);
+        var songs=res.data.songs[0].al.picUrl;
+        var songnames=res.data.songs[0].name
+        // console.log(songname)
+        _this.$store.commit(types.SONGPIC, songs)
+         _this.$store.commit(types.SONGNAME, songnames)
+      })
+    },
   },
   // computed:{
   // 		title(){

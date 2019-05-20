@@ -13,3 +13,7 @@ export const SONGTITLE = 'songTitle'
 export const SONGID = 'songid'
 
 export const PLAYID = 'playid'
+
+export const SONGPIC = 'songs'
+
+export const SONGNAME = 'songnames'

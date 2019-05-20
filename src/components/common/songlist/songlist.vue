@@ -73,6 +73,9 @@ image[lazy="loading"] {
   height: 300px;
   margin: auto;
 }
+.songlist{
+  background: white;
+}
 .music {
   padding-bottom: 106px;
 }
