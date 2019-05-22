@@ -9,7 +9,7 @@ import axios from 'axios'
 import 'mint-ui/lib/style.css'
 
 
-import { Spinner ,InfiniteScroll,Swipe, SwipeItem} from 'mint-ui';
+import { Spinner ,InfiniteScroll,Swipe, SwipeItem,Range} from 'mint-ui';
 import { Lazyload } from 'mint-ui';
 
 Vue.use(Lazyload);
@@ -22,6 +22,7 @@ Vue.use(InfiniteScroll,Lazyload);
 Vue.component(Spinner.name, Spinner);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Range.name, Range);
 
 import 'mint-ui/lib/style.css'
 axios.defaults.baseURL='http://localhost:3000/'

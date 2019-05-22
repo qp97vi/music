@@ -2,36 +2,67 @@
 
   <div class="play-box">
     <div class="play">
-      <div class="normal-play" v-show="$store.state.fullScreen">
+      <div
+        class="normal-play"
+        v-show="$store.state.fullScreen"
+      >
         <div class="background">
           <div class="filter"></div>
-         <img :src="songs" alt="">
+          <img
+            :src="songs"
+            alt=""
+          >
         </div>
         <div class="backTop">
-          <span class="iconfont icon-fanhui" @click="backing"></span> 
+          <span
+            class="iconfont icon-fanhui"
+            @click="backing"
+          ></span>
           {{this.$store.state.songnames}}
         </div>
         <div class="middle">
           <div class="middle-l">
-            <div class="cd-box">
-              <div class="cd" :class="paused? 'paused':'play'" >
-                <img :src="songs" alt="">
+            <div
+              class="cd-box"
+              @click="getlyric()"
+            >
+              <div
+                class="cd"
+                :class="paused? 'paused':'play'"
+              >
+                <img
+                  :src="songs"
+                  alt=""
+                >
               </div>
             </div>
           </div>
         </div>
-         <div class="playPackage">
+        <div class="time">
+          <em>{{format(currentTime)}}</em>
+          <mt-range
+            :value.sync="currentTime"
+            :max="duration"
+          >
+          </mt-range>
+          <em>{{format(duration)}}</em>
+        </div>
+        <div class="playPackage">
 
-           <span
+          <span
             class="iconfont iconshangyishou"
             @click="pre(songid,playid)"
           ></span>
-          <span class="iconfont" :class="paused? 'iconbofang':'iconcrm17'" @click="play"></span>
+          <span
+            class="iconfont"
+            :class="paused? 'iconbofang':'iconcrm17'"
+            @click="play"
+          ></span>
           <span
             class="iconfont iconxiayishou"
             @click="next(songid,playid)"
           ></span>
-         </div>
+        </div>
       </div>
       <!-- 播放 -->
 
@@ -47,12 +78,14 @@
       preload="auto"
       style="width:260px"
       @ended="end(songid, playid)"
+      @timeupdate="gettime()"
+      @canplay="getduration()"
       ref="audio"
     ></audio>
   </div>
 </template>
 <script>
-import { mapState, mapMutations,mapGetters, } from 'vuex';
+import { mapState, mapMutations, mapGetters, } from 'vuex';
 import * as types from "@/store/types";
 
 import store from "@/store/store.js"
@@ -62,8 +95,10 @@ export default {
     return {
       id: "",
       url: "",
-      paused:false,
-      isshow:true
+      paused: false,
+      isshow: true,
+      duration: 0,
+      currentTime: 0
     }
   },
   computed: {
@@ -78,14 +113,24 @@ export default {
     playid() {
       return this.$store.state.playid;
     },
-    songs(){    
+    songs() {
       return this.$store.state.songs;
     },
   },
-  
   methods: {
-     backing() {
-     this.$store.state.fullScreen=false;
+
+    backing() {
+      this.$store.state.fullScreen = false;
+    },
+    gettime() {
+      // console.log(this.$refs.audio.currentTime)
+      this.currentTime = this.$refs.audio.currentTime;
+    },
+    getduration() {
+      this.duration = this.$refs.audio.duration
+      console.log(this.$refs.audio.duration)
+      this.getlyric()
+
     },
     next(songid, playid) {
       this.id = playid;
@@ -104,31 +149,33 @@ export default {
         }
       }
     },
-    play(){
+    play() {
       // this.$ref.audio
-      if(this.$refs.audio.paused){
+      if (this.$refs.audio.paused) {
         this.$refs.audio.play()
-        this.paused=false
-      }else{
+        this.paused = false
+      } else {
         this.$refs.audio.pause()
-        this.paused=true
+        this.paused = true
+
       }
+
     },
     end(songid, playid) {
       this.next(songid, playid)
     },
     /*获取歌曲图片*/
-     /*获取歌曲图片*/
-    getsongPic(id){
-     
-      var _this=this;
-      this.axios.get(`/song/detail?ids=${id}`).then(function(res){
+    /*获取歌曲图片*/
+    getsongPic(id) {
+
+      var _this = this;
+      this.axios.get(`/song/detail?ids=${id}`).then(function (res) {
         console.log(res.data);
-        var songs=res.data.songs[0].al.picUrl;
-        var songnames=res.data.songs[0].name;
+        var songs = res.data.songs[0].al.picUrl;
+        var songnames = res.data.songs[0].name;
         // console.log(songnames)
         _this.$store.commit(types.SONGPIC, songs)
-         _this.$store.commit(types.SONGNAME, songnames)
+        _this.$store.commit(types.SONGNAME, songnames)
       })
     },
     getUrl(id) {
@@ -164,6 +211,30 @@ export default {
       }
 
     },
+    format(interval) {
+      // var minute=Math.floor(interval/60 | 0)//分
+      // var second=Math.floor(interval%60 )
+      // if (second < 10) {
+      //   second = '0' + second
+      // }
+      // return minute + ':' + second
+      interval = interval | 0
+      let minute = interval / 60 | 0
+      let second = interval % 60
+      if (second < 10) {
+        second = '0' + second
+      }
+      return minute + ':' + second
+    },
+    /*获取歌词*/
+    getlyric() {
+
+      this.axios.get(`/lyric?id=${this.$store.state.playid}`).then(function (response) {
+        console.log(response);
+
+      });
+      // /lyric?id=33894312
+    }
 
   },
 }
@@ -177,33 +248,33 @@ export default {
   z-index: 1111;
   background: #f2f3f4;
   display: flex;
-    flex-direction: column;
-       /* justify-content: space-around; */
+  flex-direction: column;
+  /* justify-content: space-around; */
 }
-.background{
- position: absolute;
-    left: -50%;
-    top: -50%;
-    width: 300%;
-    height: 300%;
-    z-index: -1;
-    opacity: .6;
-    -webkit-filter: blur(30px);
-    filter: blur(30px);
+.background {
+  position: absolute;
+  left: -50%;
+  top: -50%;
+  width: 300%;
+  height: 300%;
+  z-index: -1;
+  opacity: 0.6;
+  -webkit-filter: blur(30px);
+  filter: blur(30px);
 }
-.background .filter{
+.background .filter {
   filter: blur(30px);
   height: 100%;
   width: 100%;
-    background: #000;
-  opacity: .6;
+  background: #000;
+  opacity: 0.6;
   position: absolute;
 }
-.background img{
+.background img {
   width: 100%;
   height: 100%;
 }
-.backTop{
+.backTop {
   color: white;
   display: flex;
   align-items: center;
@@ -213,52 +284,64 @@ export default {
   font-size: 70px;
   z-index: 10;
 }
-audio{
+audio {
   position: absolute;
   top: 50%;
   z-index: -3;
   visibility: hidden;
 }
-.middle{
+.middle {
   width: 100%;
- margin-bottom: 140px;
- height: 800px;
- display: flex;
- align-items: center;
- justify-content: center;
- margin-top: 184px;
+  height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 184px;
+  margin-bottom: 60px;
 }
-.middle .cd-box{
+.middle .cd-box {
   width: 80%;
   margin: auto;
 }
-.middle .cd{
+.middle .cd {
   border-radius: 50%;
-  border: 15px solid hsla(0,0%,100%,.1);
-   
+  border: 15px solid hsla(0, 0%, 100%, 0.1);
 }
-.middle .play{
-  animation: rotate 20s linear infinite
+.middle .play {
+  animation: rotate 20s linear infinite;
 }
-.middle .paused{
-  animation-play-state:paused;
+.middle .paused {
+  animation-play-state: paused;
 }
-.middle img{
+.middle img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
 }
-@keyframes rotate{
-  0%{
-    transform: rotate(0)
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
   }
-  100%{
-    transform: rotate(1turn)
+  100% {
+    transform: rotate(1turn);
   }
 }
-.playPackage{
-      display: flex;
-    justify-content: space-around;
-    align-items: center;
+.time {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  color: white;
+}
+.time em:first-child {
+  margin-right: 10px;
+}
+.time em:last-child {
+  margin-left: 10px;
+}
+.playPackage {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 </style>

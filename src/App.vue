@@ -31,9 +31,9 @@ export default {
 
 <style>
 @import "./assets/reset.css";
+@import "./assets/mint-ui";
 </style>
 <style scoped>
-
 .songTop {
   display: none;
 }

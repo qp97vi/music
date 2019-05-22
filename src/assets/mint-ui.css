@@ -1,0 +1,6 @@
+.mt-range-progress{
+    background: red;
+}
+.mt-range, .mt-range>*{
+    flex: 1;
+}
