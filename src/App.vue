@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <player v-if="songlists"></player>
+    <player v-if="songlists">
+    </player>
     <router-view></router-view>
   </div>
 </template>

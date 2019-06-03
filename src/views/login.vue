@@ -47,6 +47,7 @@ export default {
         .then(function (response) {
           // handle success
           // console.log(response.data.account.id);
+            console.log(response)
 
           _this.xsrfCookieName = response.config.xsrfCookieName;
           if (_this.xsrfCookieName) {
@@ -54,13 +55,14 @@ export default {
             let redirect = decodeURIComponent(
               _this.$route.query.redirect || "/"
             );
+            
             _this.$router.push({
               path: redirect
             });
             _this.$store.commit(types.UID, response.data.account.id);
           }
-
-          // console.log( _this.musicList);
+      
+          
         })
         .catch(function (error) {
           // handle error
@@ -69,7 +71,8 @@ export default {
         .then(function () {
           // always executed
         });
-    }
+    },
+   
   }
 };
 </script>

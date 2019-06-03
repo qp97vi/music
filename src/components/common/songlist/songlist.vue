@@ -88,6 +88,7 @@ image[lazy="loading"] {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+  margin-bottom: 108px;
 }
 .Box li {
   display: flex;
