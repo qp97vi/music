@@ -9,7 +9,7 @@
         <div class="background">
           <div class="filter"></div>
           <img
-           v-lazy="songs"
+          :src="songs"
            
             alt=""
           >
@@ -25,14 +25,15 @@
           <div class="middle-l">
             <div
               class="cd-box"
-              @click="getlyric()"
+              
             >
               <div
                 class="cd"
-                :class="paused? 'paused':'play'"
+                :class="paused? 'play':'paused'"
               >
                 <img
-                  v-lazy="songs"
+                  :src="songs"
+                 
                  
                   alt=""
                 >
@@ -40,8 +41,9 @@
             </div>
           </div>
         </div>
+        <div class="tips" v-show="isshow">需要会员才能播放</div>
         <div class="time">
-          <em>{{format(currentTime)}}</em>
+          <em>{{format(currentTime||0)}}</em>
           <mt-range
             :value.sync="currentTime"
             :max="duration"
@@ -57,7 +59,7 @@
           ></span>
           <span
             class="iconfont"
-            :class="paused? 'iconbofang':'iconcrm17'"
+            :class="paused? 'iconcrm17':'iconbofang'"
             @click="play"
           ></span>
           <span
@@ -97,8 +99,9 @@ export default {
     return {
       id: "",
       url: "",
-      paused: false,
-      isshow: true,
+      paused: true,
+      isshow: false,
+
       duration: 0,
       currentTime: 0
     }
@@ -131,7 +134,7 @@ export default {
     getduration() {
       this.duration = this.$refs.audio.duration
       console.log(this.$refs.audio.duration)
-      this.getlyric()
+      // this.getlyric()
 
     },
     next(songid, playid) {
@@ -148,6 +151,7 @@ export default {
           // this.$router.push({ path: `/play/${id}` });
           this.getUrl(id)
           this.getsongPic(id)
+          this.paused=true;
         }
       }
     },
@@ -155,10 +159,10 @@ export default {
       // this.$ref.audio
       if (this.$refs.audio.paused) {
         this.$refs.audio.play()
-        this.paused = false
+        this.paused = true
       } else {
         this.$refs.audio.pause()
-        this.paused = true
+        this.paused = false
 
       }
 
@@ -186,13 +190,22 @@ export default {
         console.log(response);
         _this.url = response.data.data[0].url;
         console.log(_this.url);
-        _this.$store.commit(types.SONGURL, _this.url)
+        /*当url为空或者说该歌曲需要vip才能播放 */
+        if(_this.url==null){
+         _this.isshow=true
+         _this.currentTime=0;
+          _this.duration=0;
+        }else{
+          
+           _this.$store.commit(types.SONGURL, _this.url)
+        }
+       
       });
       this.$store.commit(types.PLAYID, id)
-      this.axios.get(`/lyric?id=${this.$store.state.playid}`).then(function (response) {
-        console.log(response);
+      // this.axios.get(`/lyric?id=${this.$store.state.playid}`).then(function (response) {
+      //   console.log(response);
 
-      });
+      // });
     },
     pre(songid, playid) {
       this.id = playid;
@@ -209,6 +222,7 @@ export default {
           // this.$router.push({ path: `/play/${id}` });
           this.getUrl(id)
           this.getsongPic(id)
+          this.paused=true;
         }
       }
 
@@ -229,20 +243,30 @@ export default {
       return minute + ':' + second
     },
     /*获取歌词*/
-    getlyric() {
+    // getlyric() {
 
-      this.axios.get(`/lyric?id=${this.$store.state.playid}`).then(function (response) {
-        console.log(response);
+    //   this.axios.get(`/lyric?id=${this.$store.state.playid}`).then(function (response) {
+    //     console.log(response);
 
-      });
-      // /lyric?id=33894312
-    }
+    //   });
+    //   // /lyric?id=33894312
+    // }
 
   },
 }
 </script>
 <style scoped>
-
+.play{
+  width: 100%;
+}
+.tips{
+  z-index: 111;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%)
+}
 .normal-play {
   height: 100%;
   width: 100%;
@@ -258,6 +282,7 @@ position: fixed;
   z-index: 1111;
   display: flex;
   height: 100%;
+  width: 100%;
 }
 .background {
   position: absolute;
