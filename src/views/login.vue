@@ -100,7 +100,7 @@ export default {
 }
 label {
   display: inline-block;
-  width: 104px;
+  width: 140px;
   text-align: right;
 }
 .login > .submit {
@@ -119,9 +119,9 @@ label {
 }
 input {
   height: 60px;
+  width: 60%;
   margin-bottom: 20px;
   padding-left: 10px;
-  width: 73%;
   border: 1px solid #ccc;
   border-radius: 6px;
 }

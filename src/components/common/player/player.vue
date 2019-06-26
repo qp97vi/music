@@ -1,6 +1,6 @@
 <template>
 
-  <div class="play-box">
+  <div class="play-box" @touchmove.prevent>
     <div class="play">
       <div
         class="normal-play"
@@ -9,7 +9,8 @@
         <div class="background">
           <div class="filter"></div>
           <img
-            :src="songs"
+           v-lazy="songs"
+           
             alt=""
           >
         </div>
@@ -31,7 +32,8 @@
                 :class="paused? 'paused':'play'"
               >
                 <img
-                  :src="songs"
+                  v-lazy="songs"
+                 
                   alt=""
                 >
               </div>
@@ -240,16 +242,22 @@ export default {
 }
 </script>
 <style scoped>
+
 .normal-play {
   height: 100%;
   width: 100%;
-  position: fixed;
-  bottom: 0;
-  z-index: 1111;
+  
   background: #f2f3f4;
   display: flex;
   flex-direction: column;
   /* justify-content: space-around; */
+}
+.play-box{
+position: fixed;
+  bottom: 0;
+  z-index: 1111;
+  display: flex;
+  height: 100%;
 }
 .background {
   position: absolute;
@@ -257,7 +265,7 @@ export default {
   top: -50%;
   width: 300%;
   height: 300%;
-  z-index: -1;
+  z-index: 0;
   opacity: 0.6;
   -webkit-filter: blur(30px);
   filter: blur(30px);
@@ -278,6 +286,7 @@ export default {
   color: white;
   display: flex;
   align-items: center;
+  z-index: 1;
 }
 .play span {
   color: white;
@@ -332,6 +341,9 @@ audio {
   width: 100%;
   margin-bottom: 20px;
   color: white;
+}
+.time em{
+  z-index: 1;
 }
 .time em:first-child {
   margin-right: 10px;

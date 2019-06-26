@@ -6,13 +6,14 @@
     >
       <mt-swipe-item v-for="(item,index) in banner">
         <img
-          :src="item.imageUrl"
+         
           alt=""
+          v-lazy="item.imageUrl"
         >
-
       </mt-swipe-item>
 
     </mt-swipe>
+    <!-- :src="item.imageUrl" -->
   </div>
 </template>
 <script>

@@ -3,7 +3,8 @@
     <div class="my">
       <div class="header">
         <img
-          :src="users.avatarUrl"
+          
+           v-lazy="users.avatarUrl"
           alt=""
         >
         <div class="name">
@@ -65,10 +66,14 @@ export default {
 </script>
 <style scoped>
 #page{
-  /* display: flex;
+   display: flex;
   flex-direction: column;
   height: 100%;
-  background: white; */
+ /* background: white; */
+}
+.my{
+  flex: 1;
+    overflow: scroll;
 }
 .header {
   height: 120px;

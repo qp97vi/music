@@ -8,7 +8,8 @@
     <div class="content">
       <div class="imgBox">
         <img
-          :src="SongList.coverImgUrl"
+         
+           v-lazy="SongList.coverImgUrl"
           alt=""
         >
         <em>{{playCount}}万</em>
@@ -18,7 +19,8 @@
 
         <div class="iconBox">
           <img
-            :src="creator.avatarUrl"
+           
+             v-lazy="creator.avatarUrl"
             alt=""
           >
           <span>{{creator.nickname}}</span>
@@ -53,6 +55,7 @@
         </div>
       </li>
     </ul>
+    <loading v-show="!song.length"></loading>
   </div>
 </template>
 <script>
@@ -60,6 +63,7 @@
 import * as types from '../store/types'
 import sidetop from "@/components/common/sideTop";
 import player from "@/components/common/player/player";
+import loading from '@/components/loading/loading'
 // import { mapMutations } from 'vuex'
 export default {
   name: "songDetail",
@@ -169,7 +173,8 @@ export default {
   },
   components: {
     sidetop,
-    player
+    player,
+    loading
   }
 };
 </script>

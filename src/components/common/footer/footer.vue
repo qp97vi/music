@@ -49,10 +49,8 @@ export default ({
   display: flex;
   align-items: center;
   justify-content: space-around;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  
+  width: 750px;
   z-index: 100;
   background: white;
   border-top: 1px solid #dddddd;

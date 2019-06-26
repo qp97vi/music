@@ -26,7 +26,8 @@
         >
 
           <img
-            :src="item.coverImgUrl"
+          
+             v-lazy="item.coverImgUrl"
             alt=""
           >
           <div class="imgRight">
@@ -83,6 +84,13 @@ export default {
 <style scoped>
 #page{
   background:white;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.songList{
+  flex: 1;
+  overflow: scroll;
 }
 img {
   width: 80px;
@@ -91,7 +99,7 @@ img {
 }
 li {
   display: flex;
-  margin-bottom: 20px;
+  
 }
 em {
   display: block;

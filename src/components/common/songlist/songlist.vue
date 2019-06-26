@@ -8,9 +8,11 @@
         v-for="(item,index) in songlist"
         v-if="index<12"
         @click="open(item.id)"
+       
       >
         <div class="imgBox">
           <img
+          
             v-lazy="item.picUrl"
             alt=""
           >
@@ -20,9 +22,11 @@
 
       </li>
     </ul>
+    <loading v-show="!songlist.length"></loading>
   </div>
 </template>
 <script>
+import loading from '@/components/loading/loading.vue'
 export default {
   data() {
     return {
@@ -39,13 +43,11 @@ export default {
         _this.songlist = response.data.result;
 
       })
-
     },
     //查看歌单详情
     open(id) {
       console.log(id);
       this.$emit('jump', id);
-
       //  this.$store.commit(types.SONGTIPS,id);
 
     }
@@ -64,15 +66,14 @@ export default {
   created() {
     this.getSongList()
     // this.getMusicList()  
+   
   },
+  components:{
+    loading
+  }
 }
 </script>
 <style scoped>
-image[lazy="loading"] {
-  width: 40px;
-  height: 300px;
-  margin: auto;
-}
 .songlist{
   background: white;
 }
@@ -88,18 +89,17 @@ image[lazy="loading"] {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 108px;
 }
 .Box li {
   display: flex;
   flex-direction: column;
   width: 240px;
   height: auto;
-  margin-bottom: 10px;
+ 
 }
 .Box span {
   display: inline-block;
-  height: 60px;
+  height: 66px;
   font-size: 24px;
   text-overflow: ellipsis;
   display: -webkit-box;

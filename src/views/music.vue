@@ -62,14 +62,13 @@ export default {
 <style scoped>
 #page {
   margin-top: 0px;
+  display: flex;
+    height: 100%;
+    flex-direction: column;
 }
-
-/* .groomList li{
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    
-} */
+.music{
+  flex: 1;
+  overflow: scroll;
+}
 </style>
 
