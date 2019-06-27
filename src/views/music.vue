@@ -1,6 +1,7 @@
 <template>
   <div id="page">
     <div class="music">
+      <search></search>
       <banner></banner>
       <songlist @jump="goplaylist"></songlist>
       <!-- <div class="groomList">
@@ -31,6 +32,7 @@ import vfooter from "@/components/common/footer/footer";
 import songlist from "@/components/common/songlist/songlist";
 import banner from "@/components/common/banner/banner";
 import * as types from "../store/types";
+import search from "@/components/search/search";
 export default {
   name: 'music',
   data() {
@@ -47,7 +49,8 @@ export default {
   components: {
     "v-footer": vfooter,
     'banner': banner,
-    'songlist': songlist
+    'songlist': songlist,
+    search,
   },
   methods: {
     goplaylist(item) {

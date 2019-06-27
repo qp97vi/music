@@ -140,6 +140,9 @@ export default {
     next(songid, playid) {
       this.id = playid;
       var _this = this;
+      if(songid){
+        alert("最后一首")
+      }
       for (var i = 0; i < songid.length; i++) {
         if (_this.id == songid[i].id) {
           if (i == songid.length - 1) {
@@ -210,6 +213,9 @@ export default {
     pre(songid, playid) {
       this.id = playid;
       var _this = this;
+      if(songid){
+        alert("这是第一首")
+      }
       for (var i = 0; i < songid.length; i++) {
         if (_this.id == songid[i].id) {
 

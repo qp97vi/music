@@ -74,6 +74,20 @@ const routes = [
     }
   },
   {
+    path:'/search',
+    name:'search',
+    meta:{
+      requireAuth:true,
+    },
+    component:resolve=>{
+      Indicator.open('加载中...');
+      require.ensure(['@/views/search'],()=>{
+        resolve(require('@/views/search'))
+        Indicator.close()
+      })
+    }
+  },
+  {
     path: '/login',
     name: 'login',
     component: resolve => {
