@@ -1,6 +1,6 @@
 <template>
 
-  <div class="play-box" @touchmove.prevent>
+  <div class="play-box" @touchmove.prevent v-show="this.$store.state.fullScreen">
     <div class="play">
       <div
         class="normal-play"
