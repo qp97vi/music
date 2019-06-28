@@ -140,8 +140,9 @@ export default {
     next(songid, playid) {
       this.id = playid;
       var _this = this;
-      if(songid){
-        alert("最后一首")
+      console.log(songid,playid)
+      if(songid.length<=1){
+        alert("后面没有歌曲了")
       }
       for (var i = 0; i < songid.length; i++) {
         if (_this.id == songid[i].id) {
@@ -198,6 +199,7 @@ export default {
          _this.isshow=true
          _this.currentTime=0;
           _this.duration=0;
+         
         }else{
           
            _this.$store.commit(types.SONGURL, _this.url)
@@ -213,8 +215,8 @@ export default {
     pre(songid, playid) {
       this.id = playid;
       var _this = this;
-      if(songid){
-        alert("这是第一首")
+      if(songid.length<=1){
+        alert("后面没有歌曲了")
       }
       for (var i = 0; i < songid.length; i++) {
         if (_this.id == songid[i].id) {
