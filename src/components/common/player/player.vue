@@ -29,7 +29,7 @@
             >
               <div
                 class="cd"
-                :class="paused? 'play':'paused'"
+                :class="isplay? 'play':'paused'"
               >
                 <img
                   :src="songs"
@@ -59,8 +59,8 @@
           ></span>
           <span
             class="iconfont"
-            :class="paused? 'iconcrm17':'iconbofang'"
-            @click="play"
+            :class="isplay? 'iconcrm17':'iconbofang'"
+            @click="operate(isplay)"
           ></span>
           <span
             class="iconfont iconxiayishou"
@@ -91,7 +91,7 @@
 <script>
 import { mapState, mapMutations, mapGetters, } from 'vuex';
 import * as types from "@/store/types";
-
+import { MessageBox } from 'mint-ui';
 import store from "@/store/store.js"
 export default {
   name: "player",
@@ -99,7 +99,6 @@ export default {
     return {
       id: "",
       url: "",
-      paused: true,
       isshow: false,
 
       duration: 0,
@@ -121,7 +120,25 @@ export default {
     songs() {
       return this.$store.state.songs;
     },
+    isplay(){
+      return this.$store.state.isplay;
+    }
   },
+  watch: {
+    isplay(val){
+      if(val){
+        this.play()
+      }else{
+        this.pause()
+      }
+    }
+  },
+  mounted() {
+    this.play()
+  },
+ created() {
+   
+ },
   methods: {
 
     backing() {
@@ -140,14 +157,15 @@ export default {
     next(songid, playid) {
       this.id = playid;
       var _this = this;
-      console.log(songid,playid)
+      
       if(songid.length<=1){
-        alert("后面没有歌曲了")
+      
+        MessageBox('提示', '后面没有歌曲了');
       }
       for (var i = 0; i < songid.length; i++) {
         if (_this.id == songid[i].id) {
           if (i == songid.length - 1) {
-            alert("最后一首")
+             MessageBox('提示', '最后一首');
             return id = songid[i - 1].id
 
           }
@@ -155,21 +173,26 @@ export default {
           // this.$router.push({ path: `/play/${id}` });
           this.getUrl(id)
           this.getsongPic(id)
-          this.paused=true;
+            this.$store.commit(types.ISPLAY,true)
         }
+      }
+    },
+    operate(isplay){
+      if(isplay){
+        this.$store.commit(types.ISPLAY,false)
+      }else{
+        this.$store.commit(types.ISPLAY,true)
       }
     },
     play() {
       // this.$ref.audio
-      if (this.$refs.audio.paused) {
+     
         this.$refs.audio.play()
-        this.paused = true
-      } else {
-        this.$refs.audio.pause()
-        this.paused = false
+       
 
-      }
-
+    },
+    pause(){
+      this.$refs.audio.pause()
     },
     end(songid, playid) {
       this.next(songid, playid)
@@ -180,7 +203,6 @@ export default {
 
       var _this = this;
       this.axios.get(`/song/detail?ids=${id}`).then(function (res) {
-        console.log(res.data);
         var songs = res.data.songs[0].al.picUrl;
         var songnames = res.data.songs[0].name;
         // console.log(songnames)
@@ -191,9 +213,7 @@ export default {
     getUrl(id) {
       var _this = this;
       this.axios.get(`song/url?id=${id}`).then(function (response) {
-        console.log(response);
         _this.url = response.data.data[0].url;
-        console.log(_this.url);
         /*当url为空或者说该歌曲需要vip才能播放 */
         if(_this.url==null){
          _this.isshow=true
@@ -216,13 +236,13 @@ export default {
       this.id = playid;
       var _this = this;
       if(songid.length<=1){
-        alert("后面没有歌曲了")
+         MessageBox('提示', '后面没有歌曲了');
       }
       for (var i = 0; i < songid.length; i++) {
         if (_this.id == songid[i].id) {
 
           if (i == 0) {
-            alert("这是第一首")
+            MessageBox('提示', '这是第一首');
             return id = songid[0].id;
           }
           let id = songid[i - 1].id
@@ -230,7 +250,8 @@ export default {
           // this.$router.push({ path: `/play/${id}` });
           this.getUrl(id)
           this.getsongPic(id)
-          this.paused=true;
+           this.$store.commit(types.ISPLAY,true)
+          
         }
       }
 

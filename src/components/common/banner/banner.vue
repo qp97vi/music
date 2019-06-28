@@ -27,7 +27,6 @@ export default {
   created() {
     var _this = this;
     this.axios.get('banner').then(function (response) {
-      console.log(response);
       _this.banner = response.data.banners
       // console.log(response.data.banners.imageUrl);
 

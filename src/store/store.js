@@ -17,6 +17,7 @@ export default new Vuex.Store({
         playid: "",
         songs:"",
         fullScreen: true,
+        isplay:true,
     },
     mutations: {
         [types.LOGIN]: (state, data) => {
@@ -53,6 +54,8 @@ export default new Vuex.Store({
         [types.SONGNAME]:(state,data)=>{
             state.songnames=data;
         },
-        
+        [types.ISPLAY]:(state,data)=>{
+            state.isplay=data;
+        },
     }
 })

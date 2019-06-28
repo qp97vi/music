@@ -53,6 +53,11 @@ export default {
       }
     }
   },
+  computed: {
+    isplay(){
+      return this.$store.state.isplay;
+    }
+  },
   methods: {
     goback() {
       this.$router.go(-1);
@@ -76,7 +81,7 @@ export default {
         _this.$store.commit(types.SONGURL, _this.url)
 
         _this.getsongPic(id)
-
+        _this.$store.commit(types.ISPLAY, true)
 
 
         // console.log(_this.url);

@@ -17,3 +17,5 @@ export const PLAYID = 'playid'
 export const SONGPIC = 'songs'
 
 export const SONGNAME = 'songnames'
+
+export const ISPLAY='isplay'

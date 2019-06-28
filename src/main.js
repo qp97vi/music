@@ -9,7 +9,7 @@ import axios from 'axios'
 import 'mint-ui/lib/style.css'
 
 
-import { Spinner ,InfiniteScroll,Swipe, SwipeItem,Range} from 'mint-ui';
+import { Spinner ,InfiniteScroll,Swipe, SwipeItem,Range } from 'mint-ui';
 import VueLazyload from 'vue-lazyload'
 
 Vue.use(VueLazyload, {

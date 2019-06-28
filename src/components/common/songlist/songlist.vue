@@ -46,7 +46,7 @@ export default {
     },
     //查看歌单详情
     open(id) {
-      console.log(id);
+      // console.log(id);
       this.$emit('jump', id);
       //  this.$store.commit(types.SONGTIPS,id);
 

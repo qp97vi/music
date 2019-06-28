@@ -90,6 +90,9 @@ export default {
     playid() {
       return this.$store.state.playid;
     },
+    isplay(){
+       return this.$store.state.isplay;
+    }
   },
   methods: {
     backing() {
@@ -101,11 +104,12 @@ export default {
       var _this = this
       this.$store.commit(types.PLAYID, id)
       this.axios.get(`song/url?id=${id}`).then(function (response) {
-        console.log(response);
+        // console.log(response);
         _this.url = response.data.data[0].url;
         // console.log(_this.url);
         _this.$store.commit(types.SONGURL, _this.url)
       
+         _this.$store.commit(types.ISPLAY, true)
         
        
            
