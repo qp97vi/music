@@ -136,9 +136,6 @@ export default {
   mounted() {
     this.play()
   },
- created() {
-   
- },
   methods: {
 
     backing() {
@@ -219,10 +216,11 @@ export default {
          _this.isshow=true
          _this.currentTime=0;
           _this.duration=0;
-         
+         _this.$store.commit(types.ISPLAY,false)
         }else{
-          
+          _this.isshow=false
            _this.$store.commit(types.SONGURL, _this.url)
+           
         }
        
       });
