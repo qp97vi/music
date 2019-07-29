@@ -30,7 +30,7 @@ Vue.component(SwipeItem.name, SwipeItem);
 Vue.component(Range.name, Range);
 
 import 'mint-ui/lib/style.css'
-axios.defaults.baseURL='http://106.13.43.60:3000/'
+axios.defaults.baseURL='http://47.111.10.57:3000/'
 Vue.prototype.axios = axios;
 
 Vue.config.productionTip = false
