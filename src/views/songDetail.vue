@@ -9,7 +9,7 @@
       <div class="imgBox">
         <img
          
-           v-lazy="SongList.coverImgUrl"
+          :src="SongList.coverImgUrl"
           alt=""
         >
         <em>{{playCount}}万</em>
@@ -20,7 +20,7 @@
         <div class="iconBox">
           <img
            
-             v-lazy="creator.avatarUrl"
+            :src="creator.avatarUrl"
             alt=""
           >
           <span>{{creator.nickname}}</span>
@@ -55,7 +55,7 @@
         </div>
       </li>
     </ul>
-    <loading v-show="!song.length"></loading>
+    <loading v-if="!song.length"></loading>
   </div>
 </template>
 <script>
@@ -150,11 +150,7 @@ export default {
   // 	},
   mounted() {
     this.$store.commit(types.SONGTITLE, '歌单')
-
-  },
-  created() {
-
-    this.id = this.$route.params.id;
+     this.id = this.$route.params.id;
 
     var _this = this;
     this.axios.get(`playlist/detail?id=${this.id}`).then(function (response) {
@@ -173,6 +169,11 @@ export default {
       // console.log(_this.songid)
       _this.$store.commit(types.SONGID, _this.songid);
     });
+
+  },
+  created() {
+
+   
 
   },
   components: {

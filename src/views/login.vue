@@ -47,7 +47,7 @@ export default {
         .then(function (response) {
           // handle success
           // console.log(response.data.account.id);
-            console.log(response)
+            // console.log(response)
 
           _this.xsrfCookieName = response.config.xsrfCookieName;
           if (_this.xsrfCookieName) {

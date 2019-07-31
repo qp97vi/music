@@ -4,7 +4,7 @@
       <div class="header">
         <img
           
-           v-lazy="users.avatarUrl"
+           :src="users.avatarUrl"
           alt=""
         >
         <div class="name">
