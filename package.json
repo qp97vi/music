@@ -22,8 +22,11 @@
     "vue": "^2.5.2",
     "vue-lazyload": "^1.2.6",
     "vue-router": "^3.0.1",
+    "vue-server-renderer": "^2.6.7",
+    "vue-skeleton-webpack-plugin": "^1.2.2",
     "vuex": "^3.1.0",
-    "webpack-dev-server": "^2.9.7"
+    "webpack-dev-server": "^2.9.7",
+    "webpack-log": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
